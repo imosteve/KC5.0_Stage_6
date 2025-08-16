@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+passlib
+python-jose[cryptography]==3.3.0
