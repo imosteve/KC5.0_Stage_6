@@ -13,12 +13,16 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login/")
+
+STUDENTS_FILE = "task1_student_portal/students.json"
 
 def hash_password(password: str) -> str:
+    """Hash a plain password"""
     return pwd_context.hash(password)
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
+    """Verify a password against its hash"""
     return pwd_context.verify(plain_password, hashed_password)
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
@@ -34,23 +38,25 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     return encoded_jwt
 
 def load_students() -> dict:
-    """Load students from JSON file"""
+    """Load students from JSON file with error handling"""
     try:
-        if os.path.exists("students.json"):
-            with open("students.json", "r") as f:
+        if os.path.exists(STUDENTS_FILE):
+            with open(STUDENTS_FILE, "r") as f:
                 return json.load(f)
         return {}
-    except (json.JSONDecodeError, FileNotFoundError):
+    except (json.JSONDecodeError, FileNotFoundError, IOError) as e:
+        # Handle file errors as specified in task requirements
         return {}
 
 def save_students(students: dict):
-    """Save students to JSON file"""
+    """Save students to JSON file with error handling"""
     try:
-        with open("students.json", "w") as f:
-            json.dump(students, f, indent=2, default=str)
-    except Exception as e:
+        with open(STUDENTS_FILE, "w") as f:
+            json.dump(students, f, indent=2)
+    except (IOError, OSError) as e:
+        # Handle file errors as specified in task requirements
         raise HTTPException(
-            status_code=500,
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Error saving student data: {str(e)}"
         )
 

@@ -1,0 +1,24 @@
+{
+  "imosteve": {
+    "username": "imosteve",
+    "password": "$2b$12$4hVfh1iHUYrKb0jU8u01FegRQ8owHLXDM6rXCcL16A/.T2TmUbzfC",
+    "grades": [
+      50.0,
+      60.0,
+      70.0,
+      80.0,
+      90.0
+    ]
+  },
+  "user2": {
+    "username": "user2",
+    "password": "$2b$12$1.0dOOdcz8sCQokoLOyz0eoT70Mych57ALYmeDLBiIGrKeewpo3LK",
+    "grades": [
+      50.0,
+      60.0,
+      70.0,
+      80.0,
+      90.0
+    ]
+  }
+}
