@@ -16,8 +16,8 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login/")
 
 # File paths
-USERS_FILE = "users.json"
-NOTES_FILE = "notes.json"
+USERS_FILE = "task4_note_api/users.json"
+NOTES_FILE = "task4_note_api/notes.json"
 
 def hash_password(password: str) -> str:
     """Hash a plain password"""
