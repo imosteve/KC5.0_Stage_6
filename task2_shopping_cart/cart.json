@@ -1,0 +1,14 @@
+{
+  "user1": {
+    "laptop": {
+      "product_name": "laptop",
+      "quantity": 50,
+      "price": 5500.0
+    },
+    "rice": {
+      "product_name": "rice",
+      "quantity": 4,
+      "price": 550.0
+    }
+  }
+}

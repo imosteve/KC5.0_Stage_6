@@ -4,5 +4,11 @@
     "description": "5 bags of rice",
     "price": 550.0,
     "stock": 5
+  },
+  "laptop": {
+    "name": "laptop",
+    "description": "20 pieces of pc",
+    "price": 5500.0,
+    "stock": 50
   }
 }
