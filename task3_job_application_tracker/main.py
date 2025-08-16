@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException, Depends, status
 from fastapi.security import OAuth2PasswordRequestForm
-from .models import User, UserCreate, JobApplication, JobApplicationCreate, Token
+from .models import User, JobApplication, Token
 from .auth import (
     hash_password, authenticate_user, create_access_token, 
     get_current_user, load_users, save_users,
@@ -9,10 +9,10 @@ from .auth import (
 from datetime import timedelta
 from typing import List
 
-app = FastAPI(title="Job Application Tracker API", version="1.0.0")
+app = FastAPI(title="Job Application Tracker API")
 
 @app.post("/register/", status_code=status.HTTP_201_CREATED)
-def register_user(user: UserCreate):
+def register_user(user: User):
     """Register a new user"""
     try:
         users = load_users()
@@ -42,7 +42,7 @@ def register_user(user: UserCreate):
         )
 
 @app.post("/login/", response_model=Token)
-def login_user(form_data: OAuth2PasswordRequestForm = Depends()):
+def login_user(form_data: User):
     """Login endpoint that returns access token"""
     user = authenticate_user(form_data.username, form_data.password)
     if not user:
@@ -60,7 +60,7 @@ def login_user(form_data: OAuth2PasswordRequestForm = Depends()):
     return {"access_token": access_token, "token_type": "bearer"}
 
 @app.post("/applications/", status_code=status.HTTP_201_CREATED)
-def add_application(application: JobApplicationCreate, current_user: dict = Depends(get_current_user)):
+def add_application(application: JobApplication, current_user: dict = Depends(get_current_user)):
     """Add a new job application"""
     try:
         applications = load_applications()
