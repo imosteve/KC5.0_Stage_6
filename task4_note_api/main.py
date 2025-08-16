@@ -42,7 +42,7 @@ def register_user(user: User):
         )
 
 @app.post("/login/", response_model=Token)
-def login_user(form_data: OAuth2PasswordRequestForm = Depends()):
+def login_user(form_data: User):
     """Login endpoint that returns a JWT token"""
     user = authenticate_user(form_data.username, form_data.password)
     if not user:
