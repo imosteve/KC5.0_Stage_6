@@ -1,26 +1,18 @@
 from pydantic import BaseModel
-from typing import List, Optional
 from enum import Enum
 
 class UserRole(str, Enum):
     admin = "admin"
     customer = "customer"
 
-class User(BaseModel):
-    username: str
-    password: str
-    role: UserRole
-
 class UserCreate(BaseModel):
     username: str
     password: str
     role: UserRole
 
-class Product(BaseModel):
-    name: str
-    description: str
-    price: float
-    stock: int
+class UserLogin(BaseModel):
+    username: str
+    password: str
 
 class ProductCreate(BaseModel):
     name: str

@@ -1,0 +1,8 @@
+{
+  "rice": {
+    "name": "rice",
+    "description": "5 bags of rice",
+    "price": 550.0,
+    "stock": 5
+  }
+}
